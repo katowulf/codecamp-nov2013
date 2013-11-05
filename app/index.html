@@ -15,44 +15,9 @@
 </head>
 <body ng-controller="myCtrl">
 
-    <h1>Chat App</h1>
+    <h1>Examples</h1>
 
-    <ul id="messages" ng-scroll-down="messages" ng-show="user">
-        <li ng-repeat="message in messages"><label class="name">{{message.name}}</label> {{message.body}}</li>
-    </ul>
-
-    <form ng-submit="user.username && body && addRow(user.username, body)" ng-show="user">
-        <label class="name">{{user.username}}</label>
-        <input ng-model="body" type="text" placeholder="message" size="30" />
-        <button type="submit">send</button>
-    </form>
-
-    <button ng-show="!user" ng-click="login()">Log In</button>
-    <button ng-show="user" ng-click="logout()">Log Out</button>
-
-<script>
-    var app = angular.module('myApp', ['firebase']);
-    app.controller('myCtrl', function($scope, angularFireCollection, angularFireAuth) {
-        var fb = new Firebase('https://codecamp-nov2013.firebaseio.com/messages');
-        angularFireAuth.initialize(fb, {scope: $scope, name: "user", callback: function() {
-            $scope.messages = angularFireCollection(fb);
-            $scope.addRow = function(name, body) {
-                $scope.messages.add({name: name, body: body});
-                $scope.body = null;
-            };
-            $scope.login = function() { angularFireAuth.login("twitter"); };
-            $scope.logout = function() { angularFireAuth.logout(); }
-        }});
-    });
-    app.directive('ngScrollDown', function() {
-        return function(scope, el, attr) {
-            scope.$watchCollection(attr.ngScrollDown, function() {
-                var el = document.getElementById('messages');
-                el.scrollTop = el.scrollHeight;
-            });
-        }
-    })
-</script>
+    <div ng-include="'nav.html'"></div>
 
 </body>
 </html>

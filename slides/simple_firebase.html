@@ -1,0 +1,20 @@
+<html>
+<head>
+    <script src="https://static.firebase.com/v0/firebase.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.1.5/angular.min.js"></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/0.3.0/angularfire.min.js"></script>
+</head>
+<body ng-app="myModule">
+  <div ng-controller="myApp">
+    <input type="text" ng-model="name"/><br/>
+    <h1>Hello {{name}}!</h1>
+  </div>
+</body>
+<script>
+  angular.module("myModule", ["firebase"]).
+  controller("myApp", function($scope, angularFire) {
+    var url = "https://codecamp-nov2013.firebaseio.com/message/";
+    angularFire(new Firebase(url), $scope, "name");
+  });
+</script>
+</html>

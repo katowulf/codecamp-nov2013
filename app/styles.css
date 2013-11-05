@@ -1,0 +1,43 @@
+
+body {
+   line-height: 28px;
+   font-size: 16px;
+}
+
+#messages {
+   padding: 20px;
+   background-color: #fafafa;
+   border: 1px solid #aaa;
+   border-radius: 10px;
+   overflow: auto;
+   height: 250px;
+   list-style-type: none;
+}
+
+#messages li {
+   border-top: 1px solid #aaa;
+   margin-bottom: 5px;
+}
+
+#messages li:first-child {
+   border-top: none;
+}
+
+#messages li span {
+   display: block;
+   float: left;
+   width: 80px;
+   overflow: hidden;
+   padding: 0 10px;
+   margin-right: 10px;
+   background-color: #eee;
+   position: relative;
+}
+
+#messages li span:after {
+   content: ":";
+   display: block;
+   position: absolute;
+   right: -10px;
+}
+

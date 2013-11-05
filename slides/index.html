@@ -1,0 +1,231 @@
+<!--
+Google IO 2012/2013 HTML5 Slide Template
+
+Authors: Eric Bidelman <ebidel@gmail.com>
+         Luke Mahé <lukem@google.com>
+
+URL: https://code.google.com/p/io-2012-slides
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Angular ♥ Firebase</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">-->
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+    <!--This one seems to work all the time, but really small on ipad-->
+    <!--<meta name="viewport" content="initial-scale=0.4">-->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="stylesheet" media="all" href="theme/css/default.css">
+    <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="theme/css/phone.css">
+    <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
+    <script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+</head>
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+
+<slide class="logoslide nobackground">
+    <article class="flexbox vcenter">
+      <span>
+        <img src="images/angularjs.png"/>
+        <img src="images/firebase.png"/>
+      </span>
+    </article>
+</slide>
+
+<slide class="title-slide segue nobackground">
+    <aside class="note">
+        <section>
+            <p>Who am I? What is my experience?</p>
+        </section>
+    </aside>
+    <aside class="gdbar"><img src="images/mark.png"></aside>
+    <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+        <h1 data-config-title><!-- populated from slide_config.json --></h1>
+        <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+        <p data-config-presenter><!-- populated from slide_config.json --></p>
+    </hgroup>
+</slide>
+
+<slide>
+    <aside class="note">
+        <section>
+            <p>Show of hands for Angular/Firebase experience</p>
+        </section>
+    </aside>
+    <hgroup>
+        <h2>What we will cover</h2>
+    </hgroup>
+    <article>
+        <ul class="build fade">
+            <li>Intro to Angular and Firebase</li>
+            <li>Building a chat app in 20 lines</li>
+            <li>Routing and Authentication</li>
+            <li>Securing the data</li>
+            <li>You drive...</li>
+        </ul>
+    </article>
+</slide>
+
+<slide>
+    <hgroup>
+        <h2>Angular: A Superheroic MVW Framework</h2>
+    </hgroup>
+    <article>
+        <p>Data binding magic.</p>
+        <p>Declaratively specify views in plain HTML</p>
+        <iframe style="height:125px;" src="simple_angular.html"></iframe>
+        <br />
+      <pre class="prettyprint" data-lang="html">
+&lt;body ng-app&gt;
+  &lt;div ng-controller="MyApp"&gt;
+    &lt;input type="text" ng-model="name"/&gt;&lt;br/&gt;
+    <b>&lt;h1 ng-cloak&gt;Hello {{name}}!&lt;/h1&gt;</b>
+  &lt;/div&gt;
+&lt;/body&gt;
+      </pre>
+    </article>
+</slide>
+
+<slide>
+    <hgroup>
+        <h2>What is Firebase?</h2>
+    </hgroup>
+    <article>
+        <ul>
+            <li>A real-time data persistence platform</li>
+            <li>Authentication &amp; security rules</li>
+            <li>Serves as the complete backend (no servers required)</li>
+        </ul>
+        <iframe scrolling="no" style="width:205px;height:190px;margin-left:150px;" data-src="https://www.firebase.com/how-it-works-drawing-demo.html"></iframe>
+        <iframe scrolling="no" style="width:205px;height:190px;margin-left:150px;" data-src="https://www.firebase.com/how-it-works-drawing-demo.html"></iframe>
+        <p>&nbsp;</p>
+    </article>
+    <aside class="note">
+        <section>
+            <ul>
+                <li><a href="https://www.firebase.com/how-it-works-drawing-demo.html">https://www.firebase.com/how-it-works-drawing-demo.html</a></li>
+                <li><a href="https://hiw-ovb8l4p38pr.firebaseio-demo.com">https://hiw-ovb8l4p38pr.firebaseio-demo.com</a></li>
+            </ul>
+        </section>
+    </aside>
+</slide>
+
+<slide class="fill nobackground">
+    <article>
+        <img style="height:600px; width:1000px;" src="images/3-way-binding.png"/>
+    </article>
+</slide>
+
+<slide>
+    <hgroup>
+        <h2>Firebase ❤ Angular = AngularFire</h2>
+    </hgroup>
+    <article>
+        <iframe style="height:125px;" src="simple_firebase.html"></iframe>
+      <pre class="prettyprint" data-lang="html">
+&lt;body ng-app="myModule"&gt;
+  &lt;div ng-controller="myApp"&gt;
+    &lt;input type="text" ng-model="name"/&gt;&lt;br/&gt;&lt;h1&gt;Hello {{name}}!&lt;/h1&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+&lt;script&gt;
+  <b>angular.module("myModule", ["firebase"]).
+      controller("myApp", function($scope, angularFire) {
+      var url = "<a href="https://codecamp-nov2013.firebaseio.com/">https://codecamp-nov2013.firebaseio.com/message/</a>";
+      angularFire(new Firebase(url), $scope, "name", "");
+      });</b>
+&lt;/script&gt;
+</pre>
+    </article>
+    <aside class="note">
+        <section>
+            <a href="https://codecamp-nov2013.firebaseio.com/">https://codecamp-nov2013.firebaseio.com/message/</a>
+        </section>
+    </aside>
+</slide>
+
+<slide class="segue dark nobackground">
+    <aside class="gdbar right bottom"><img src="images/mark.png"></aside>
+    <article class="flexbox vleft auto-fadein">
+        <h2>Let's get to work!</h2>
+        <h3>Building a chat app in 20 lines.</h3>
+        <p>Follow along at <a href="https://katowulf.github.io/codecamp-nov2013/">https://katowulf.github.io/dcc-nov2013/</a></p>
+    </article>
+</slide>
+
+<slide>
+    <hgroup>
+        <h2>User Authentication in AngularFire</h2>
+    </hgroup>
+    <article class="smaller">
+        <p>AngularFire provides an easy way to integrate user login via
+            <b>JSON Web Tokens</b>.</p>
+        <p>Convenience wrappers over Facebook, Github, Twitter and Persona.</p>
+      <pre class="prettyprint" data-lang="html">
+&lt;body ng-controller="MyController"&gt;
+  &lt;span ng-show="user"&gt;
+    {{user.name}} | &lt;a href="#" ng-click="logout()"&gt;Logout&lt;/a&gt;
+  &lt;/span&gt;
+  <b>&lt;a href="#" ng-hide="user" ng-click="login()"&gt;Login&lt;/a&gt;</b>
+  &lt;script&gt;
+    function MyController($scope, angularFireAuth) {
+      var url = "https://anant.firebaseio.com/";
+      <b>angularFireAuth.initialize(url, {scope: $scope, name: "user"});</b>
+      $scope.login = function() {
+        angularFireAuth.login("facebook");
+      };
+      $scope.logout = function() {
+        angularFireAuth.logout();
+      };
+    }
+  &lt;/script&gt;
+&lt;/body&gt;
+      </pre>
+    </article>
+</slide>
+
+<slide>
+    <hgroup>
+        <h2>Security with Firebase</h2>
+    </hgroup>
+    <article>
+        <p>Security in a client-only app has always been a big open question</p>
+        <p>Tie it to authentication and express logic as lightweight expressions</p>
+      <pre class="prettyprint" data-lang="javascript">
+{
+  "rules": {
+    "$userid": {
+      ".read": true,
+      ".write": "auth.id == $userid"
+    }
+  }
+}
+</pre>
+    </article>
+</slide>
+
+<slide class="thank-you-slide segue nobackground">
+    <aside class="gdbar right"><img src="images/mark.png"></aside>
+    <article class="flexbox vleft auto-fadein">
+        <h2>I want your Feedback!</h2><br/><br/>
+        <h2>wulf@firebase.com</h2>
+    </article>
+    <p class="auto-fadein" data-config-contact>
+        <!-- populated from slide_config.json -->
+    </p>
+</slide>
+
+<slide class="backdrop"></slide>
+
+</slides>
+
+<!--[if IE]>
+<script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+<script>CFInstall.check({mode: 'overlay'});</script>
+<![endif]-->
+</body>
+</html>

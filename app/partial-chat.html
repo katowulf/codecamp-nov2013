@@ -1,0 +1,9 @@
+<ul id="messages" ng-scroll-down="messages" ng-show="user">
+    <li ng-repeat="message in messages"><label class="name">{{message.name}}</label> {{message.body}}</li>
+</ul>
+
+<form ng-submit="user.username && body && addRow(user.username, body)" ng-show="user">
+    Send as {{user.username}}:
+    <input ng-model="body" type="text" placeholder="message" size="30" />
+    <button type="submit">send</button>
+</form>

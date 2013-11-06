@@ -1,0 +1,8 @@
+
+<div class="box" ng-cloak-auth ng-show="user">
+    <p><img src="{{user.photos[0].value}}" /> {{user.displayName}} (@{{user.username}})</p>
+</div>
+
+<div class="box" ng-cloak-auth ng-show="!user">
+    <p>Please log in</p>
+</div>

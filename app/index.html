@@ -17,7 +17,7 @@
 
 <h1>Step 4: Security</h1>
 
-<p><a href="https://github.com/katowulf/codecamp-nov2013/blob/step4/app/security.template.json">Security Template</a> | <a href="https://github.com/katowulf/codecamp-nov2013/blob/step4/app/security.json">Security Completed</a></p>
+<p><a href="https://github.com/katowulf/codecamp-nov2013/blob/step4/app/security.template.json">Template of security rules</a> | <a href="https://github.com/katowulf/codecamp-nov2013/blob/step4/app/security.json">Completed security rules</a></p>
 
 <ul class="inline nav">
     <li><a href="#/home">home</a></li>
@@ -50,6 +50,11 @@
             .otherwise({
                 redirectTo: '/home'
             })
+    });
+    app.run(function($rootScope) {
+       $rootScope.$on('angularFireAuth:login', function() {
+           new Firebase('https://codecamp-nov2013.firebaseio.com/user/'+$rootScope.user.uid).set($rootScope.user.username);
+       });
     });
     app.controller('mainCtrl', function($scope, angularFireAuth, $location) {
         angularFireAuth.initialize(fb, {

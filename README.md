@@ -17,10 +17,10 @@ You can skip ahead to any step using:
 
     git checkout tags/stepN
 
-   - [Step 1: Chat app in 20 lines](https://katowulf.github.io/codecamp-nov2013/app/step1.html)
-   - [Step 2: Authentication](https://katowulf.github.io/codecamp-nov2013/app/step2.html)
-   - [Step 3: Routing](https://katowulf.github.io/codecamp-nov2013/app/step3.html)
-   - [Step 4: Security](https://katowulf.github.io/codecamp-nov2013/app/step4.html)
+   - [Step 1: Chat app in 20 lines](http://katowulf.github.io/codecamp-nov2013/app/step1.html)
+   - [Step 2: Authentication](http://katowulf.github.io/codecamp-nov2013/app/step2.html)
+   - [Step 3: Routing](http://katowulf.github.io/codecamp-nov2013/app/step3.html)
+   - [Step 4: Security](http://katowulf.github.io/codecamp-nov2013/app/step4.html)
 
 ## More info and feedback
 

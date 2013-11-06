@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Angular ♥ Firebase | Step 3: Routing</title>
+
+    <link rel="stylesheet" href="styles.css"/>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
+
+    <script src="https://cdn.firebase.com/v0/firebase.js"></script>
+    <script src="https://cdn.firebase.com/v0/firebase-simple-login.js"></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/0.3.0/angularfire.min.js"></script>
+
+</head>
+<body ng-controller="mainCtrl">
+
+<div ng-include="'nav.html'"></div>
+
+<ul class="inline nav">
+   <li><a href="#/home">home</a></li>
+   <li><a href="#/chat" ng-show="user">chat</a></li>
+</ul>
+<br/>
+
+<h1>Step 3: Routing <a target="_blank" href="https://github.com/katowulf/codecamp-nov2013/blob/step3/app/index.html">[source code]</a></h1>
+
+<div ng-view></div>
+
+<button ng-show="!user" ng-click="login()">Log In</button>
+<button ng-show="user" ng-click="logout()">Log Out</button>
+
+<script>
+    var fb = new Firebase('https://codecamp-nov2013.firebaseio.com/messages');
+    var app = angular.module('myApp', ['firebase'], function($routeProvider) {
+        $routeProvider
+            .when('/chat', {
+                templateUrl: 'partial-chat.html',
+                controller: 'chatCtrl',
+                authRequired: true
+            })
+            .when('/account', {
+                templateUrl: 'partial-account.html',
+                authRequired: true
+            })
+            .when('/home', {
+                templateUrl: 'partial-home.html',
+                authRequired: false
+            })
+            .otherwise({
+                redirectTo: '/home'
+            })
+    });
+    app.controller('mainCtrl', function($scope, angularFireAuth, $location) {
+        angularFireAuth.initialize(fb, {
+            scope: $scope,
+            name: "user",
+            path: '/home',
+            simple: true
+        });
+        $scope.login = function() { angularFireAuth.login("twitter"); };
+        $scope.logout = function() {
+            angularFireAuth.logout();
+            $location.path('/home');
+        };
+    });
+    app.controller('chatCtrl', function($scope, angularFireCollection) {
+        $scope.messages = angularFireCollection(fb);
+        $scope.addRow = function(name, body) {
+            $scope.messages.add({name: name, body: body});
+            $scope.body = null;
+        };
+    });
+    app.directive('ngScrollDown', function() {
+        return function(scope, el, attr) {
+            scope.$watchCollection(attr.ngScrollDown, function() {
+                var el = document.getElementById('messages');
+                el.scrollTop = el.scrollHeight;
+            });
+        }
+    });
+    app.directive('ngCloakAuth', function($rootScope) {
+        var notLoggedInYet = true;
+        return {
+            restrict: 'A',
+            compile: function(el) {
+                el.toggleClass('hide', notLoggedInYet);
+                function fn() {
+                    notLoggedInYet = false;
+                    el.removeClass('hide');
+                }
+                $rootScope.$on("angularFireAuth:login", fn);
+                $rootScope.$on("angularFireAuth:logout", fn);
+                $rootScope.$on("angularFireAuth:error", fn);
+            }
+        }
+    });
+    app.directive('ngShowAuth', function($rootScope) {
+        var loginState;
+        return {
+            restrict: 'A',
+            compile: function(el, attr) {
+                var expState = attr.ngShowAuth;
+                function fn(newState) {
+                    loginState = newState;
+                    el.toggleClass('hide', loginState !== expState );
+                }
+                fn(null);
+                $rootScope.$on("angularFireAuth:login", function() { fn('login') });
+                $rootScope.$on("angularFireAuth:logout", function() { fn('logout') });
+                $rootScope.$on("angularFireAuth:error", function() { fn('error') });
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

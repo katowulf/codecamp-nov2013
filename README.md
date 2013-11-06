@@ -13,17 +13,13 @@ View the [slides here](https://katowulf.github.io/codecamp-nov2013/slides/)
     git clone https://github.com/katowulf/codecamp-nov2013.git
     git checkout tags/step0
 
-During the code camp, you can follow along by checking out the preliminary code for each step as follows:
+You can skip ahead to any step using:
 
-   `git checkout tags/stepX-template`
-
-Or check out the completed code for the step using:
-
-   `git checkout tags/stepX`
+    git checkout tags/stepN
 
    - [Step 1: Chat app in 20 lines](https://katowulf.github.io/codecamp-nov2013/app/step1.html)
-   - [Step 2: Routing](https://katowulf.github.io/codecamp-nov2013/app/step2.html)
-   - [Step 3: Authentication](https://katowulf.github.io/codecamp-nov2013/app/step3.html)
+   - [Step 2: Authentication](https://katowulf.github.io/codecamp-nov2013/app/step2.html)
+   - [Step 3: Routing](https://katowulf.github.io/codecamp-nov2013/app/step3.html)
    - [Step 4: Security](https://katowulf.github.io/codecamp-nov2013/app/step4.html)
 
 ## More info and feedback

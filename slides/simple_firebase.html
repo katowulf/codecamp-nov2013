@@ -11,10 +11,11 @@
   </div>
 </body>
 <script>
-  angular.module("myModule", ["firebase"]).
-  controller("myApp", function($scope, angularFire) {
-    var url = "https://codecamp-nov2013.firebaseio.com/message/";
-    angularFire(new Firebase(url), $scope, "name");
-  });
+   angular.module("myModule", ["firebase"]).
+   controller("myApp", function($scope, angularFire) {
+      var url = "https://codecamp-nov2013.firebaseio.com/hello_example/";
+      $scope.name = "";
+      angularFire(new Firebase(url), $scope, "name");
+   });
 </script>
 </html>

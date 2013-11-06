@@ -135,8 +135,9 @@ URL: https://code.google.com/p/io-2012-slides
 &lt;script&gt;
   <b>angular.module("myModule", ["firebase"]).
       controller("myApp", function($scope, angularFire) {
-      var url = "<a href="https://codecamp-nov2013.firebaseio.com/">https://codecamp-nov2013.firebaseio.com/message/</a>";
-      angularFire(new Firebase(url), $scope, "name", "");
+         var url = "<a href="https://codecamp-nov2013.firebaseio.com/">https://codecamp-nov2013.firebaseio.com/message/</a>";
+         $scope.name = "";
+         angularFire(new Firebase(url), $scope, "name");
       });</b>
 &lt;/script&gt;
 </pre>
@@ -173,7 +174,7 @@ URL: https://code.google.com/p/io-2012-slides
   <b>&lt;a href="#" ng-hide="user" ng-click="login()"&gt;Login&lt;/a&gt;</b>
   &lt;script&gt;
     function MyController($scope, angularFireAuth) {
-      var url = "https://anant.firebaseio.com/";
+      var url = "https://codecamp-nov2013.firebaseio.com/";
       <b>angularFireAuth.initialize(url, {scope: $scope, name: "user"});</b>
       $scope.login = function() {
         angularFireAuth.login("facebook");

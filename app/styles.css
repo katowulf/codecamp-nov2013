@@ -33,3 +33,51 @@ label.name {
    background-color: #eee;
    position: relative;
 }
+
+.box {
+   background-color: #fafafa;
+   border: 1px solid #aaa;
+   border-radius: 10px;
+   padding: 10px;
+}
+
+ul.inline {
+   margin: 0;
+   padding: 0;
+   list-style-type: none;
+}
+
+ul.inline li {
+   display: block;
+   float: left;
+}
+
+ul.nav li a {
+   display: block;
+   padding: 5px;
+   background-color: #eee;
+   border: 1px solid #aaa;
+   margin: 5px;
+   width: 100px;
+   border-radius: 5px;
+   text-align: center;
+   text-decoration: none;
+}
+
+ul.nav li a:hover {
+   background-color: #d8fae3;
+}
+
+br {
+   clear: both;
+}
+
+.hide {
+   display: none;
+}
+
+pre {
+   line-height: 16px;
+   font-size: 14px;
+   padding: 10px;
+}

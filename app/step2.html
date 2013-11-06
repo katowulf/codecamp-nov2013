@@ -2,7 +2,7 @@
 <html ng-app="myApp">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Angular ♥ Firebase | Step 1: Basic chat</title>
+    <title>Angular ♥ Firebase | Step 2: Authentication</title>
 
     <link rel="stylesheet" href="styles.css"/>
 
@@ -17,27 +17,34 @@
 
 <div ng-include="'nav.html'"></div>
 
-<h1>Step 1: Basic chat <a target="_blank" href="https://github.com/katowulf/codecamp-nov2013/blob/step1/app/index.html">[source code]</a></h1>
+<h1>Step 2: Authentication <a target="_blank" href="https://github.com/katowulf/codecamp-nov2013/blob/step2/app/index.html">[source code]</a></h1>
 
-<ul id="messages" ng-scroll-down="messages">
+<ul id="messages" ng-scroll-down="messages" ng-show="user">
     <li ng-repeat="message in messages"><label class="name">{{message.name}}</label> {{message.body}}</li>
 </ul>
 
-<form ng-submit="name && body && addRow(name, body)">
-    <input ng-model="name" type="text" placeholder="name" size="10">
+<form ng-submit="user.username && body && addRow(user.username, body)" ng-show="user">
+    Send as {{user.username}}:
     <input ng-model="body" type="text" placeholder="message" size="30" />
     <button type="submit">send</button>
 </form>
 
+<button ng-show="!user" ng-click="login()">Log In</button>
+<button ng-show="user" ng-click="logout()">Log Out</button>
+
 <script>
     var app = angular.module('myApp', ['firebase']);
-    app.controller('myCtrl', function($scope, angularFireCollection) {
+    app.controller('myCtrl', function($scope, angularFireCollection, angularFireAuth) {
         var fb = new Firebase('https://codecamp-nov2013.firebaseio.com/messages');
-        $scope.messages = angularFireCollection(fb);
-        $scope.addRow = function(name, body) {
-            $scope.messages.add({name: name, body: body});
-            $scope.body = null;
-        };
+        angularFireAuth.initialize(fb, {scope: $scope, name: "user", callback: function() {
+            $scope.messages = angularFireCollection(fb);
+            $scope.addRow = function(name, body) {
+                $scope.messages.add({name: name, body: body});
+                $scope.body = null;
+            };
+            $scope.login = function() { angularFireAuth.login("twitter"); };
+            $scope.logout = function() { angularFireAuth.logout(); }
+        }});
     });
     app.directive('ngScrollDown', function() {
         return function(scope, el, attr) {

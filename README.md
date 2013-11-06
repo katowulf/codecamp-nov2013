@@ -6,27 +6,21 @@ Build a lightning-fast, real-time app with routing, authentication, and a functi
 
 ## Slide Presentation
 
-View the [slides here](https://katowulf.github.io/codecamp-nov2013/slides/)
+View the [slides here](http://katowulf.github.io/codecamp-nov2013/slides/index.html)
 
-## Examples
-
-   - [Step 1: Chat app in 20 lines](https://katowulf.github.io/codecamp-nov2013/app/step1.html)
-   - [Step 2: Routing](https://katowulf.github.io/codecamp-nov2013/app/step2.html)
-   - [Step 3: Authentication](https://katowulf.github.io/codecamp-nov2013/app/step3.html)
-   - [Step 4: Security](https://katowulf.github.io/codecamp-nov2013/app/step4.html)
-
-## The Source
+## The App
 
     git clone https://github.com/katowulf/codecamp-nov2013.git
-    git checkout tags/step1-template
+    git checkout tags/step0
 
-During the code camp, you can follow along by checking out the template for each step as follows:
+You can skip ahead to any step using:
 
-    git checkout tags/stepX-template
+    git checkout tags/stepN
 
-Or check out the completed code for the step using:
-
-    git checkout tags/stepX
+   - [Step 1: Chat app in 20 lines](https://katowulf.github.io/codecamp-nov2013/app/step1.html)
+   - [Step 2: Authentication](https://katowulf.github.io/codecamp-nov2013/app/step2.html)
+   - [Step 3: Routing](https://katowulf.github.io/codecamp-nov2013/app/step3.html)
+   - [Step 4: Security](https://katowulf.github.io/codecamp-nov2013/app/step4.html)
 
 ## More info and feedback
 

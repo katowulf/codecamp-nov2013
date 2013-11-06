@@ -18,23 +18,108 @@
 
 <div ng-include="'nav.html'"></div>
 
-<h1>Step 4: Security <a target="_blank" href="https://github.com/katowulf/codecamp-nov2013/blob/step4/app/security.json">[source code]</a></h1>
+<h1>Step 4: Security <a target="_blank" href="https://github.com/katowulf/codecamp-nov2013/blob/step4/app/index.html">[source code]</a></h1>
 
-<pre class="prettyprint">{{contents}}</pre>
+<p><a href="https://github.com/katowulf/codecamp-nov2013/blob/step4/app/security.template.json">Template of security rules</a> | <a href="https://github.com/katowulf/codecamp-nov2013/blob/step4/app/security.json">Completed security rules</a></p>
 
-<script src="lib/prettify.js"></script>
+<ul class="inline nav">
+    <li><a href="#/home">home</a></li>
+    <li><a href="#/chat" ng-show="user">chat</a></li>
+</ul>
+<br/>
+
+<div ng-view></div>
+
+<button ng-show="!user" ng-click="login()">Log In</button>
+<button ng-show="user" ng-click="logout()">Log Out</button>
+
 <script>
-   angular.module('myApp', []).controller('mainCtrl', function($scope, $http) {
-       var el = document.getElementsByTagName("PRE")[0];
-       $http({method: 'GET', url: 'security.json'}).
-           success(function(data, status, headers, config) {
-               angular.element(el).text(JSON.stringify(data, null, 2));
-               prettyPrint();
-           }).
-           error(function(data, status, headers, config) {
-               angular.element(el).text(status);
-           });
-   });
+    var fb = new Firebase('https://codecamp-nov2013.firebaseio.com/messages');
+    var app = angular.module('myApp', ['firebase'], function($routeProvider) {
+        $routeProvider
+            .when('/chat', {
+                templateUrl: 'partial-chat.html',
+                controller: 'chatCtrl',
+                authRequired: true
+            })
+            .when('/account', {
+                templateUrl: 'partial-account.html',
+                authRequired: true
+            })
+            .when('/home', {
+                templateUrl: 'partial-home.html',
+                authRequired: false
+            })
+            .otherwise({
+                redirectTo: '/home'
+            })
+    });
+    app.run(function($rootScope) {
+        $rootScope.$on('angularFireAuth:login', function() {
+            new Firebase('https://codecamp-nov2013.firebaseio.com/user/'+$rootScope.user.uid).set($rootScope.user.username);
+        });
+    });
+    app.controller('mainCtrl', function($scope, angularFireAuth, $location) {
+        angularFireAuth.initialize(fb, {
+            scope: $scope,
+            name: "user",
+            path: '/home',
+            simple: true
+        });
+        $scope.login = function() { angularFireAuth.login("twitter"); };
+        $scope.logout = function() {
+            angularFireAuth.logout();
+            $location.path('/home');
+        };
+    });
+    app.controller('chatCtrl', function($scope, angularFireCollection) {
+        $scope.messages = angularFireCollection(fb);
+        $scope.addRow = function(name, body) {
+            $scope.messages.add({name: name, body: body});
+            $scope.body = null;
+        };
+    });
+    app.directive('ngScrollDown', function() {
+        return function(scope, el, attr) {
+            scope.$watchCollection(attr.ngScrollDown, function() {
+                var el = document.getElementById('messages');
+                el.scrollTop = el.scrollHeight;
+            });
+        }
+    });
+    app.directive('ngCloakAuth', function($rootScope) {
+        var notLoggedInYet = true;
+        return {
+            restrict: 'A',
+            compile: function(el) {
+                el.toggleClass('hide', notLoggedInYet);
+                function fn() {
+                    notLoggedInYet = false;
+                    el.removeClass('hide');
+                }
+                $rootScope.$on("angularFireAuth:login", fn);
+                $rootScope.$on("angularFireAuth:logout", fn);
+                $rootScope.$on("angularFireAuth:error", fn);
+            }
+        }
+    });
+    app.directive('ngShowAuth', function($rootScope) {
+        var loginState;
+        return {
+            restrict: 'A',
+            compile: function(el, attr) {
+                var expState = attr.ngShowAuth;
+                function fn(newState) {
+                    loginState = newState;
+                    el.toggleClass('hide', loginState !== expState );
+                }
+                fn(null);
+                $rootScope.$on("angularFireAuth:login", function() { fn('login') });
+                $rootScope.$on("angularFireAuth:logout", function() { fn('logout') });
+                $rootScope.$on("angularFireAuth:error", function() { fn('error') });
+            }
+        }
+    });
 </script>
 
 </body>

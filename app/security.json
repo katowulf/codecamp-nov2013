@@ -2,9 +2,11 @@
    "rules": {
       ".read": true,
       ".write": false,
-      "hello_example": {
-         ".write": true,
-         ".validate": "newData.isString() && newData.val().length < 1000"
+      "user": {
+         "$user": {
+            ".write": "auth.uid === $user",
+            ".validate": "newData.isString() && newData.val().length < 1000"
+         }
       },
       "messages": {
          "$message": {
@@ -14,7 +16,7 @@
                ".validate": "newData.isString() && newData.val().length < 1000"
             },
             "name": {
-               ".validate": "newData.isString() && newData.val().length < 1000"
+               ".validate": "newData.val() === root.child('user/'+auth.uid)"
             },
             "$other": {
                ".validate": false

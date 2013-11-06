@@ -2,23 +2,9 @@
    "rules": {
       ".read": true,
       ".write": false,
-      "hello_example": {
-         ".write": true,
-         ".validate": "newData.isString() && newData.val().length < 1000"
-      },
       "messages": {
          "$message": {
-            ".write": true,
-            ".validate": "newData.hasChildren(['body', 'name'])",
-            "body": {
-               ".validate": "newData.isString() && newData.val().length < 1000"
-            },
-            "name": {
-               ".validate": "newData.isString() && newData.val().length < 1000"
-            },
-            "$other": {
-               ".validate": false
-            }
+            ".write": true
          }
       }
    }

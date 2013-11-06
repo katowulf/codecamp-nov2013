@@ -6,7 +6,7 @@ Build a lightning-fast, real-time app with routing, authentication, and a functi
 
 ## Slide Presentation
 
-View the [slides here](https://katowulf.github.io/codecamp-nov2013/slides/)
+View the [slides here](http://katowulf.github.io/codecamp-nov2013/slides/)
 
 ## The App
 

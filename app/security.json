@@ -10,12 +10,14 @@
       },
       "messages": {
          "$message": {
-            ".write": "auth !== null",
+            // append only, cannot overwrite existing messages
+            ".write": "auth !== null && !data.exists()",
             ".validate": "newData.hasChildren(['body', 'name'])",
             "body": {
                ".validate": "newData.isString() && newData.val().length < 1000"
             },
             "name": {
+               // must match the user profile's name (must post as myself)
                ".validate": "newData.val() === root.child('user/'+auth.uid)"
             },
             "$other": {

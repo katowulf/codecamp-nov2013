@@ -97,8 +97,8 @@ URL: https://code.google.com/p/io-2012-slides
     <article>
         <ul>
             <li>A real-time data persistence platform</li>
-            <li>Authentication &amp; security rules</li>
-            <li>Serves as the complete backend (no servers required)</li>
+            <li>Provides authentication &amp; security rules</li>
+            <li>Can serve as a complete backend (no servers required)</li>
         </ul>
         <iframe scrolling="no" style="width:205px;height:190px;margin-left:150px;" data-src="https://www.firebase.com/how-it-works-drawing-demo.html"></iframe>
         <iframe scrolling="no" style="width:205px;height:190px;margin-left:150px;" data-src="https://www.firebase.com/how-it-works-drawing-demo.html"></iframe>
@@ -108,7 +108,6 @@ URL: https://code.google.com/p/io-2012-slides
         <section>
             <ul>
                 <li><a href="https://www.firebase.com/how-it-works-drawing-demo.html">https://www.firebase.com/how-it-works-drawing-demo.html</a></li>
-                <li><a href="https://hiw-ovb8l4p38pr.firebaseio-demo.com">https://hiw-ovb8l4p38pr.firebaseio-demo.com</a></li>
             </ul>
         </section>
     </aside>
@@ -142,11 +141,6 @@ URL: https://code.google.com/p/io-2012-slides
 &lt;/script&gt;
 </pre>
     </article>
-    <aside class="note">
-        <section>
-            <a href="https://codecamp-nov2013.firebaseio.com/">https://codecamp-nov2013.firebaseio.com/message/</a>
-        </section>
-    </aside>
 </slide>
 
 <slide class="segue dark nobackground">
@@ -154,64 +148,18 @@ URL: https://code.google.com/p/io-2012-slides
     <article class="flexbox vleft auto-fadein">
         <h2>Let's get to work!</h2>
         <h3>Building a chat app in 20 lines.</h3>
-        <p>Follow along at <a href="https://katowulf.github.io/codecamp-nov2013/">https://katowulf.github.io/dcc-nov2013/</a></p>
-    </article>
-</slide>
-
-<slide>
-    <hgroup>
-        <h2>User Authentication in AngularFire</h2>
-    </hgroup>
-    <article class="smaller">
-        <p>AngularFire provides an easy way to integrate user login via
-            <b>JSON Web Tokens</b>.</p>
-        <p>Convenience wrappers over Facebook, Github, Twitter and Persona.</p>
-      <pre class="prettyprint" data-lang="html">
-&lt;body ng-controller="MyController"&gt;
-  &lt;span ng-show="user"&gt;
-    {{user.name}} | &lt;a href="#" ng-click="logout()"&gt;Logout&lt;/a&gt;
-  &lt;/span&gt;
-  <b>&lt;a href="#" ng-hide="user" ng-click="login()"&gt;Login&lt;/a&gt;</b>
-  &lt;script&gt;
-    function MyController($scope, angularFireAuth) {
-      var url = "https://codecamp-nov2013.firebaseio.com/";
-      <b>angularFireAuth.initialize(url, {scope: $scope, name: "user"});</b>
-      $scope.login = function() {
-        angularFireAuth.login("facebook");
-      };
-      $scope.logout = function() {
-        angularFireAuth.logout();
-      };
-    }
-  &lt;/script&gt;
-&lt;/body&gt;
-      </pre>
-    </article>
-</slide>
-
-<slide>
-    <hgroup>
-        <h2>Security with Firebase</h2>
-    </hgroup>
-    <article>
-        <p>Security in a client-only app has always been a big open question</p>
-        <p>Tie it to authentication and express logic as lightweight expressions</p>
-      <pre class="prettyprint" data-lang="javascript">
-{
-  "rules": {
-    "$userid": {
-      ".read": true,
-      ".write": "auth.id == $userid"
-    }
-  }
-}
-</pre>
+        <p>&nbsp;</p>
+        <h2>Grab the code and follow along:</h2>
+        <h4>git clone https://github.com/katowulf/codecamp-nov2013.git</h4>
+        <h4>git checkout step0</h4>
     </article>
 </slide>
 
 <slide class="thank-you-slide segue nobackground">
     <aside class="gdbar right"><img src="images/mark.png"></aside>
     <article class="flexbox vleft auto-fadein">
+        <h2>View the examples and slides in GitHub</h2>
+        <p><a href="https://github.com/katowulf/codecamp-nov2013/">https://github.com/katowulf/dcc-nov2013/</a></p>
         <h2>I want your Feedback!</h2><br/><br/>
         <h2>wulf@firebase.com</h2>
     </article>

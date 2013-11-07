@@ -51,11 +51,6 @@ URL: https://code.google.com/p/io-2012-slides
 </slide>
 
 <slide>
-    <aside class="note">
-        <section>
-            <h3>http://katowulf.github.io/codecamp-nov2013/slides/index.html</h3>
-        </section>
-    </aside>
     <hgroup>
         <h2>What we will cover</h2>
     </hgroup>
@@ -68,6 +63,11 @@ URL: https://code.google.com/p/io-2012-slides
             <li>You drive...</li>
         </ul>
     </article>
+    <aside class="note">
+        <section>
+            <h3>http://katowulf.github.io/codecamp-nov2013/slides/index.html</h3>
+        </section>
+    </aside>
 </slide>
 
 <slide>
@@ -134,7 +134,7 @@ URL: https://code.google.com/p/io-2012-slides
 &lt;script&gt;
   <b>angular.module("myModule", ["firebase"]).
       controller("myApp", function($scope, angularFire) {
-         var url = "<a href="https://codecamp-nov2013.firebaseio.com/">https://codecamp-nov2013.firebaseio.com/message/</a>";
+         var url = "<a href="https://codecamp-nov2013.firebaseio.com/">https://codecamp-nov2013.firebaseio.com/hello_example/</a>";
          $scope.name = "";
          angularFire(new Firebase(url), $scope, "name");
       });</b>
@@ -152,6 +152,7 @@ URL: https://code.google.com/p/io-2012-slides
         <h2>Follow along:</h2>
         <h3>git clone https://github.com/katowulf/codecamp-nov2013.git</h3>
         <h3>git checkout step0</h3>
+        <h3>(npm install -g http-server)</h3>
     </article>
     <aside class="note">
         <section>

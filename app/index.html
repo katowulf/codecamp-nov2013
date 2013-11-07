@@ -47,7 +47,6 @@
     app.directive('ngScrollDown', function() {
         return function(scope, el, attr) {
             scope.$watchCollection(attr.ngScrollDown, function() {
-                var el = document.getElementById('messages');
                 el.scrollTop = el.scrollHeight;
             });
         }

@@ -13,7 +13,7 @@
     <script src="https://cdn.firebase.com/libs/angularfire/0.3.0/angularfire.min.js"></script>
 
 </head>
-<body ng-controller="myCtrl">
+<body ng-controller="mainCtrl">
 
 <h1>Step 1: Basic chat</h1>
 
@@ -29,7 +29,7 @@
 
 <script>
     var app = angular.module('myApp', ['firebase']);
-    app.controller('myCtrl', function($scope, angularFireCollection) {
+    app.controller('mainCtrl', function($scope, angularFireCollection) {
         var fb = new Firebase('https://codecamp-nov2013.firebaseio.com/messages');
         $scope.messages = angularFireCollection(fb);
         $scope.addRow = function(name, body) {

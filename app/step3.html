@@ -74,10 +74,11 @@
     app.directive('ngScrollDown', function() {
         return function(scope, el, attr) {
             scope.$watchCollection(attr.ngScrollDown, function() {
-                el.scrollTop = el.scrollHeight;
+                el[0].scrollTop = el[0].scrollHeight;
             });
         }
     });
+    // see improved version: https://gist.github.com/katowulf/7328023
     app.directive('ngCloakAuth', function($rootScope) {
         var notLoggedInYet = true;
         return {

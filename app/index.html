@@ -13,7 +13,7 @@
     <script src="https://cdn.firebase.com/libs/angularfire/0.3.0/angularfire.min.js"></script>
 
 </head>
-<body ng-controller="myCtrl">
+<body ng-controller="mainCtrl">
 
 <h1>Step 2: Authentication</h1>
 
@@ -32,7 +32,7 @@
 
 <script>
     var app = angular.module('myApp', ['firebase']);
-    app.controller('myCtrl', function($scope, angularFireCollection, angularFireAuth) {
+    app.controller('mainCtrl', function($scope, angularFireCollection, angularFireAuth) {
         var fb = new Firebase('https://codecamp-nov2013.firebaseio.com/messages');
         angularFireAuth.initialize(fb, {scope: $scope, name: "user", callback: function() {
             $scope.messages = angularFireCollection(fb);
@@ -47,7 +47,7 @@
     app.directive('ngScrollDown', function() {
         return function(scope, el, attr) {
             scope.$watchCollection(attr.ngScrollDown, function() {
-                el.scrollTop = el.scrollHeight;
+                el[0].scrollTop = el[0].scrollHeight;
             });
         }
     })
